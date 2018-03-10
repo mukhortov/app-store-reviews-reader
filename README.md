@@ -13,3 +13,8 @@ App Store Reviews Reader Application written in TypeScript
 ### Demo:
 
 http://mukhortov.com/wake.app/reviews/
+
+
+### Screenshot:
+
+![App-Screenshot](app-screenshot.png)
