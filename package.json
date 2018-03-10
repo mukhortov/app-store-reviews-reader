@@ -1,0 +1,31 @@
+{
+  "name": "app-store-reviews-reader",
+  "version": "0.1.0",
+  "description": "App Store reviews reader",
+  "author": "Peter Mukhortov",
+  "homepage": "http://www.mukhortov.com",
+  "license": "MIT",
+  "main": "./src/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://bitbucket.org/mukhortov/app-store-reviews-reader.git"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-less": "^3.3.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-typescript": "^3.1.6",
+    "gulp-uglify": "^3.0.0",
+    "rivets": "^0.9.6",
+    "tsify": "^3.0.1",
+    "typescript": "^2.7.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

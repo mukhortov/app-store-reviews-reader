@@ -1,0 +1,105 @@
+.container {
+	max-width: 800px;
+}
+.app-info {
+	position: relative;
+	padding: 2px 10px 6px 75px;
+	background: @background-color;
+	border-radius: 5px;
+	margin: 18px 0;
+
+	img {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		border-radius: 20%;
+	}
+
+	h3,
+	h5,
+	p {
+		margin: 0;
+	}
+
+	h5 {
+		margin-top: -3px;
+	}
+
+	a {
+		color: inherit;
+		border-bottom: 1px dashed @default-text-color;
+
+		&:hover {
+			border-bottom-style: solid;
+		}
+	}
+}
+
+.reviews {
+	margin-top: 32px;
+	list-style: decimal outside;
+}
+
+.review {
+	background: @background-color;
+	border-radius: 6px;
+	padding: 8px 12px;
+
+	.title {
+		margin-bottom: 0;
+		font-weight: bold;
+	}
+
+	.rating {
+		font-size: 80%;
+		color: @gray-text-color;
+
+		var {
+			color: @accent-color-orange;
+			font-style: normal;
+		}
+	}
+
+	.details {
+		font-size: 90%;
+		float: right;
+		text-align: right;
+		color: @gray-text-color;
+	}
+
+	.content {
+		display: block;
+		margin: 6px 0 0;
+		line-height: 1.4;
+		color: @default-text-color;
+	}
+}
+
+.filter {
+	label {
+		float: left;
+		padding-top: 4px;
+		font-weight: normal;
+	}
+}
+
+.tags {
+	margin-left: 75px;
+}
+
+.tag {
+	border-radius: 12px;
+	padding: 3px 10px;
+	background: @background-dark-color;
+	color: #fff;
+	font-size: 12px;
+	display: inline-block;
+	margin: 5px 5px 5px 0;
+	min-width: 36px;
+	text-align: center;
+	cursor: pointer;
+
+	&.active {
+		background: @accent-color;
+	}
+}

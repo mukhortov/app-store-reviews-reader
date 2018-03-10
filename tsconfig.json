@@ -1,0 +1,13 @@
+{
+	"files": [
+		"src/main.ts"
+	],
+	"compilerOptions": {
+		"removeComments": true,
+		"target": "es3",
+		"lib": [
+			"dom",
+			"es7"
+		]
+	}
+}
