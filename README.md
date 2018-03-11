@@ -8,7 +8,7 @@ App Store Reviews Reader Application written in TypeScript
 
 1. run `npm install` || `yarn install`
 2. run `gulp`
-3. open `./dist/index.html` in you browser
+3. open `./dist/index.html` in your browser
 
 ### Demo:
 
