@@ -4,7 +4,7 @@ import { country } from '../model/Country'
 import Review from '../model/Review'
 
 interface GetReviewsCallback {
-	(reviews: [Review], appInfo: AppInfo, nextPage: number, error: any)
+	(reviews: Review[], appInfo: AppInfo, nextPage: number, error: any)
 }
 
 export default class API {
@@ -15,7 +15,7 @@ export default class API {
 	public getReviews(locale: string, page: number, callback: GetReviewsCallback) {
 		this.getJson('GET', this.generateUrl(locale, page), (json, error) => {
 			let appInfo: AppInfo = null
-			let reviews: [Review] = null
+			let reviews: Review[] = null
 			let nextPage: number = null
 
 			if (!error && json.feed && json.feed.entry && json.feed.link) {
