@@ -13,7 +13,7 @@
 <body>
 	<div class="container" id="container">
 
-		<header>
+		<header rv-class-loading="appInfo | not">
 			<div class="app-info">
 				<a rv-href="appInfo.appUrl" target="_blank">
 					<img rv-src="appInfo.image" width="53" height="53" rv-alt="appInfo.name" align="top">
@@ -27,7 +27,7 @@
 			</div>
 		</header>
 
-		<main>
+		<main rv-class-loading="reviews | empty">
 			<p>
 				Number of Reviews: { reviews | filter filters.locale.key filters.locale.value | filter filters.version.key filters.version.value
 				| filter filters.rating.key filters.rating.value | length }<br>

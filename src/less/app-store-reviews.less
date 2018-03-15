@@ -1,6 +1,20 @@
 .container {
 	max-width: 800px;
 }
+
+.loading {
+	text-align: center;
+	padding: 16px;
+
+	* {
+		display: none;
+	}
+}
+
+main.loading:before {
+	content: 'Loading...'
+}
+
 .app-info {
 	position: relative;
 	padding: 2px 10px 6px 75px;
