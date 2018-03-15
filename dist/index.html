@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> App Store Review Reader </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="Author" content="Peter Mukhortov">
+
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="container" id="container">
+
+		<header rv-class-loading="appInfo | not">
+			<div class="app-info">
+				<a rv-href="appInfo.appUrl" target="_blank">
+					<img rv-src="appInfo.image" width="53" height="53" rv-alt="appInfo.name" align="top">
+				</a>
+				<h3><a rv-href="appInfo.appUrl" target="_blank">{ appInfo.name }</a></h3>
+				<p class="float-right align-right">
+					Total reviews: { reviews | length }<br> Average rating: { reviews | average 'rating' }
+				</p>
+				<h5>By <a rv-href="appInfo.authorUrl" target="_blank">{ appInfo.author }</a></h5>
+				<p>{ appInfo.price }</p>
+			</div>
+		</header>
+
+		<main rv-class-loading="reviews | empty">
+			<p>
+				Number of Reviews: { reviews | filter filters.locale.key filters.locale.value | filter filters.version.key filters.version.value
+				| filter filters.rating.key filters.rating.value | length }<br>
+				Average rating: { reviews | filter filters.locale.key filters.locale.value | filter filters.version.key filters.version.value
+				| filter filters.rating.key filters.rating.value | average 'rating' }
+			</p>
+
+			<div class="filter">
+				<label>Country:</label>
+				<div class="tags">
+					<span class="tag" rv-on-click="controller.filterLocale" rv-each-review="reviews | unique 'locale' | sortBy 'store'" rv-class-active="filters.locale.value | contains review.locale">{ review.store }</span>
+					<a href="javascript:;" rv-unless="filters.locale.value | empty" rv-on-click="controller.clearLocaleFilter">clear</a>
+				</div>
+			</div>
+			<div class="filter">
+				<label>Version:</label>
+				<div class="tags">
+					<span class="tag" rv-on-click="controller.filterVersion" rv-each-review="reviews | unique 'version' | sortBy 'version'" rv-class-active="filters.version.value | contains review.version">{ review.version }</span>
+					<a href="javascript:;" rv-unless="filters.version.value | empty" rv-on-click="controller.clearVersionFilter">clear</a>
+				</div>
+			</div>
+			<div class="filter">
+				<label>Rating:</label>
+				<div class="tags">
+					<span class="tag" rv-on-click="controller.filterRating" rv-each-review="reviews | unique 'rating' | sortBy 'rating'" rv-class-active="filters.rating.value | contains review.rating">{ review.rating }</span>
+					<a href="javascript:;" rv-unless="filters.rating.value | empty" rv-on-click="controller.clearRatingFilter">clear</a>
+				</div>
+			</div>
+			<div class="filter">
+				<div class="tags">
+					<a href="javascript:;" rv-unless="filters.locale.value | empty | and filters.version.value | empty | and filters.rating.value | empty"
+					 rv-on-click="controller.clearFilters">clear all filters</a>
+				</div>
+			</div>
+
+			<ol class="reviews">
+				<li class="review" rv-each-review="reviews |
+					filter filters.locale.key filters.locale.value |
+					filter filters.version.key filters.version.value |
+					filter filters.rating.key filters.rating.value
+				">
+					<div class="details">
+						{ review.author }<br>
+						{ review.store }, v{ review.version }
+					</div>
+					<h6 class="title">{ review.title }</h6>
+					<span class="rating">
+						<var>{ review.starRating }</var>
+						({ review.rating })
+					</span>
+					<p class="content">{ review.content }</p>
+				</li>
+			</ol>
+		</main>
+
+		<footer></footer>
+
+	</div>
+	<script src="bundle.js"></script>
+</body>
+</html>
