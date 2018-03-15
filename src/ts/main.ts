@@ -1,8 +1,6 @@
 import * as rivets from 'rivets'
-import AppInfo from './model/AppInfo'
 import { country } from './model/Country'
 import { dataModel } from './model/DataModel'
-import Review from './model/Review'
 import API from './service/Api'
 import RivetsFormatters from './service/RivetsFormatters'
 

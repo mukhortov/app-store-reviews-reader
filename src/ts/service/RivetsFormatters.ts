@@ -10,6 +10,7 @@ export default class RivetsFormatters {
 		rivets.formatters.last = arr => arr.pop()
 		rivets.formatters.sort = arr => arr.sort()
 		rivets.formatters.and = (first, second) => first && second
+		rivets.formatters.not = value => !value
 
 		rivets.formatters.sortBy = (arr: any[], sortKey: any): any[] => {
 			return arr.sort((a, b) => {

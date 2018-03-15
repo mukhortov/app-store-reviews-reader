@@ -1,4 +1,4 @@
-export const country = {
+export const country: any = {
 	us: 'USA',
 	ru: 'Russia',
 	es: 'Spain',
@@ -15,7 +15,7 @@ export const country = {
 	cn: 'China',
 }
 
-// export const Store = {
+// export const country = {
 
 // // Europe
 
