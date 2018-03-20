@@ -2,7 +2,7 @@ import DataModel from '../model/DataModel'
 
 const toggleFilterValue = (model: DataModel, name: string) => {
 	if (model.filters[name].value.includes(model.review[name])) {
-		model.filters[name].value = model.filters.locale.value.filter(item => item !== model.review[name])
+		model.filters[name].value = model.filters[name].value.filter(item => item !== model.review[name])
 	} else {
 		model.filters[name].value.push(model.review[name])
 	}
