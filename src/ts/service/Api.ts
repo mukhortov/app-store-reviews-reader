@@ -3,55 +3,49 @@ import AppInfo from '../model/AppInfo'
 import { country } from '../model/Country'
 import Review from '../model/Review'
 
-interface GetReviewsCallback {
-	(reviews: Review[], appInfo: AppInfo, nextPage: number, error: any)
-}
-
 export default class API {
 	private itunesUrl: string = Config.appStoreUrl
 	private imageSize: number = window.devicePixelRatio > 1 ? 2 : 0
 	private defaultAppId: string = Config.appId
 
-	public getReviews(locale: string, page: number, callback: GetReviewsCallback) {
-		this.getJson('GET', this.generateUrl(locale, page), (json, error) => {
-			let appInfo: AppInfo = null
-			let reviews: Review[] = null
-			let nextPage: number = null
+	public getReviews(locale: string, page: number) {
+		return new Promise((resolve, reject) => {
+			this.getJson2('GET', this.generateUrl(locale, page)).then((json: any) => {
+				let appInfo: AppInfo = null
+				let reviews: Review[] = null
+				let nextPage: number = null
 
-			if (!error && json.feed && json.feed.entry && json.feed.link) {
-				appInfo = this.decodeAppInfo(json.feed.entry.shift())
-				reviews = json.feed.entry.map(this.decodeReview.bind(this, locale))
-				nextPage = this.decodeNextPage(json.feed.link)
-			} else {
-				error = error || 'JSON parse error'
-			}
+				if (json.feed && json.feed.entry && json.feed.link) {
+					appInfo = this.decodeAppInfo(json.feed.entry.shift())
+					reviews = json.feed.entry.map(this.decodeReview.bind(this, locale))
+					nextPage = this.decodeNextPage(json.feed.link)
 
-			callback(reviews, appInfo, nextPage, error)
+					resolve({ appInfo, reviews, nextPage })
+				} else {
+					reject('JSON parse error')
+				}
+			}).catch(error => reject(error))
 		})
 	}
 
-	private getJson(method: string, url: string, callback: (json: any, error: any) => void) {
-		const request = new XMLHttpRequest()
+	private getJson2(method: string, url: string) {
+		return new Promise((resolve, reject) => {
+			const request = new XMLHttpRequest()
 
-		request.open(method, url, true)
+			request.open(method, url, true)
 
-		request.onload = () => {
-			if (request.status >= 200 && request.status < 400) {
-				// Success
-				const data = JSON.parse(request.responseText)
-				callback(data, null)
-			} else {
-				// Server returns an error
-				callback(null, 'Server returned an error')
+			request.onload = () => {
+				if (request.status >= 200 && request.status < 400) {
+					const data: any = JSON.parse(request.responseText)
+					resolve(data)
+				} else {
+					reject('Server returned an error')
+				}
 			}
-		}
 
-		request.onerror = () => {
-			// Connection error
-			callback(null, 'Connection error')
-		}
-
-		request.send()
+			request.onerror = () => reject('Connection error')
+			request.send()
+		})
 	}
 
 	// ★★★★★

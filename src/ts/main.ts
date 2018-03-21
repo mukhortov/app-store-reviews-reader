@@ -12,12 +12,7 @@ rivetsFormatters.init()
 rivets.bind(document.querySelector('#container'), dataModel)
 
 function fetchReviews(locale: string, page: number) {
-	api.getReviews(locale, page, (reviews, appInfo, nextPage, error) => {
-		if (error) {
-			console.log('[Main: fetchReviews] error: ', error)
-			return
-		}
-
+	api.getReviews(locale, page).then(({ appInfo, reviews, nextPage }) => {
 		dataModel.reviews = dataModel.reviews.concat(reviews)
 
 		if (country.us === country[locale]) {
