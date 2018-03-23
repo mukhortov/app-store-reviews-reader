@@ -10,7 +10,7 @@ export default class API {
 
 	public getReviews(locale: string, page: number) {
 		return new Promise((resolve, reject) => {
-			this.getJson2('GET', this.generateUrl(locale, page)).then((json: any) => {
+			this.getJson('GET', this.generateUrl(locale, page)).then((json: any) => {
 				let appInfo: AppInfo = null
 				let reviews: Review[] = null
 				let nextPage: number = null
@@ -28,7 +28,7 @@ export default class API {
 		})
 	}
 
-	private getJson2(method: string, url: string) {
+	private getJson(method: string, url: string) {
 		return new Promise((resolve, reject) => {
 			const request = new XMLHttpRequest()
 
