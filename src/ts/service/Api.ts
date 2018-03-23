@@ -11,14 +11,10 @@ export default class API {
 	public getReviews(locale: string, page: number) {
 		return new Promise((resolve, reject) => {
 			this.getJson('GET', this.generateUrl(locale, page)).then((json: any) => {
-				let appInfo: AppInfo = null
-				let reviews: Review[] = null
-				let nextPage: number = null
-
 				if (json.feed && json.feed.entry && json.feed.link) {
-					appInfo = this.decodeAppInfo(json.feed.entry.shift())
-					reviews = json.feed.entry.map(this.decodeReview.bind(this, locale))
-					nextPage = this.decodeNextPage(json.feed.link)
+					const appInfo = this.decodeAppInfo(json.feed.entry.shift())
+					const reviews = json.feed.entry.map(this.decodeReview.bind(this, locale))
+					const nextPage = this.decodeNextPage(json.feed.link)
 
 					resolve({ appInfo, reviews, nextPage })
 				} else {
@@ -36,7 +32,7 @@ export default class API {
 
 			request.onload = () => {
 				if (request.status >= 200 && request.status < 400) {
-					const data: any = JSON.parse(request.responseText)
+					const data: object = JSON.parse(request.responseText)
 					resolve(data)
 				} else {
 					reject('Server returned an error')
