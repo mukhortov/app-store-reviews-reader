@@ -37,10 +37,9 @@ export default class RivetsFormatters {
 			return arr.filter(item => {
 				if (uniqueArr.includes(item[filterKey])) {
 					return false
-				} else {
-					uniqueArr.push(item[filterKey])
-					return true
 				}
+				uniqueArr.push(item[filterKey])
+				return true
 			})
 		}
 
@@ -51,9 +50,9 @@ export default class RivetsFormatters {
 		rivets.formatters.contains = (arr: any[], search: any): boolean => {
 			if (arr.length > 0) {
 				return arr.includes(search)
-			} else {
-				return false
 			}
+
+			return false
 		}
 
 	}
