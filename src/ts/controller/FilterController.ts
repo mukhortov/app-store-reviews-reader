@@ -1,25 +1,26 @@
 import DataModel from '../model/DataModel'
+import { FilterKeys } from '../model/FilterKeys'
 
-const toggleFilterValue = (model: DataModel, name: string) => {
-	if (model.filters[name].value.includes(model.review[name])) {
-		model.filters[name].value = model.filters[name].value.filter(item => item !== model.review[name])
+const toggleFilterValue = (model: DataModel, filterKey: string) => {
+	if (model.filters[filterKey].value.includes(model.review[filterKey])) {
+		model.filters[filterKey].value = model.filters[filterKey].value.filter(item => item !== model.review[filterKey])
 	} else {
-		model.filters[name].value.push(model.review[name])
+		model.filters[filterKey].value.push(model.review[filterKey])
 	}
 }
 
 export default class FilterController {
 
 	public filterLocale(event: Event, model: DataModel) {
-		toggleFilterValue(model, 'locale')
+		toggleFilterValue(model, FilterKeys.locale)
 	}
 
 	public filterRating(event: Event, model: DataModel) {
-		toggleFilterValue(model, 'rating')
+		toggleFilterValue(model, FilterKeys.rating)
 	}
 
 	public filterVersion(event: Event, model: DataModel) {
-		toggleFilterValue(model, 'version')
+		toggleFilterValue(model, FilterKeys.version)
 	}
 
 	public clearVersionFilter(event: Event, model: DataModel) {

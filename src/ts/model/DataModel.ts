@@ -1,5 +1,6 @@
 import FilterController from '../controller/FilterController'
 import AppInfo from './AppInfo'
+import { FilterKeys } from './FilterKeys'
 import Filters from './Filters'
 import Review from './Review'
 
@@ -17,15 +18,15 @@ export let dataModel: DataModel = {
 	review: null,
 	filters: {
 		locale: {
-			key: 'locale',
+			key: FilterKeys.locale,
 			value: ['us'],
 		},
 		version: {
-			key: 'version',
+			key: FilterKeys.version,
 			value: [],
 		},
 		rating: {
-			key: 'rating',
+			key: FilterKeys.rating,
 			value: [],
 		},
 	},
