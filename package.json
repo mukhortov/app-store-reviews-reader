@@ -21,10 +21,12 @@
     "gulp-less": "^3.3.0",
     "gulp-typescript": "^3.1.6",
     "gulp-uglify": "^3.0.0",
-    "rivets": "^0.9.6",
-    "tsify": "^3.0.1",
-    "typescript": "^2.7.2",
+    "tsify": "^3.0.4",
+    "typescript": "^2.8.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "rivets": "^0.9.6"
   }
 }
