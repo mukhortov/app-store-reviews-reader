@@ -2,7 +2,7 @@ import * as rivets from 'rivets'
 
 export default class RivetsFormatters {
 
-	public init() {
+	public static init() {
 
 		rivets.formatters.length = value => value.length || 0
 		rivets.formatters.empty = arr => arr.length === 0

@@ -4,15 +4,13 @@ import { dataModel } from './model/DataModel'
 import API from './service/Api'
 import RivetsFormatters from './service/RivetsFormatters'
 
-const api = new API()
-const rivetsFormatters = new RivetsFormatters()
+RivetsFormatters.init()
 
-rivetsFormatters.init()
-
-rivets.bind(document.querySelector('#container'), dataModel)
+const container: HTMLElement = document.querySelector('#container')
+rivets.bind(container, dataModel)
 
 function fetchReviews(locale: string, page: number) {
-	api.getReviews(locale, page).then(({ appInfo, reviews, nextPage }) => {
+	API.getReviews(locale, page).then(({ appInfo, reviews, nextPage }) => {
 		dataModel.reviews = dataModel.reviews.concat(reviews)
 
 		if (country.us === country[locale]) {

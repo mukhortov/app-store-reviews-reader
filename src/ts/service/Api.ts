@@ -4,11 +4,11 @@ import { country } from '../model/Country'
 import Review from '../model/Review'
 
 export default class API {
-	private itunesUrl: string = Config.appStoreUrl
-	private imageSize: number = window.devicePixelRatio > 1 ? 2 : 0
-	private defaultAppId: string = Config.appId
+	private static itunesUrl: string = Config.appStoreUrl
+	private static imageSize: number = window.devicePixelRatio > 1 ? 2 : 0
+	private static defaultAppId: string = Config.appId
 
-	public getReviews(locale: string, page: number) {
+	public static getReviews(locale: string, page: number) {
 		return new Promise((resolve, reject) => {
 			this.getJson('GET', this.generateUrl(locale, page)).then((json: any) => {
 				if (json.feed && json.feed.entry && json.feed.link) {
@@ -24,7 +24,7 @@ export default class API {
 		})
 	}
 
-	private getJson(method: string, url: string) {
+	private static getJson(method: string, url: string) {
 		return new Promise((resolve, reject) => {
 			const request = new XMLHttpRequest()
 
@@ -45,11 +45,11 @@ export default class API {
 	}
 
 	// ★★★★★
-	private setRating(rating: string): string {
+	private static setRating(rating: string): string {
 		const maxRating = 5
 		let stars = ''
 
-		for (let i = +rating; i--; ) {
+		for (let i = +rating; i--;) {
 			stars += '★'
 		}
 
@@ -60,36 +60,36 @@ export default class API {
 		return stars
 	}
 
-	private decodeAppInfo(json: any): AppInfo {
+	private static decodeAppInfo(json: any): AppInfo {
 		return {
-			name:      json['im:name'].label,
-			author:    json['im:artist'].label,
+			name: json['im:name'].label,
+			author: json['im:artist'].label,
 			authorUrl: json['im:artist'].attributes.href,
-			image:     json['im:image'][this.imageSize].label,
-			price:     json['im:price'].label === 'Get' ? 'Free' : json['im:price'].label,
-			appUrl:    json.id.label,
+			image: json['im:image'][this.imageSize].label,
+			price: json['im:price'].label === 'Get' ? 'Free' : json['im:price'].label,
+			appUrl: json.id.label,
 		}
 	}
 
-	private decodeReview(locale: string, json: any): Review {
+	private static decodeReview(locale: string, json: any): Review {
 		if (!json.author) {
 			return null
 		}
 
 		return {
-			id:         json.id.label,
-			title:      json.title.label,
-			author: 	json.author.name.label,
-			content:    json.content.label,
-			rating:     Number(json['im:rating'].label),
+			id: json.id.label,
+			title: json.title.label,
+			author: json.author.name.label,
+			content: json.content.label,
+			rating: Number(json['im:rating'].label),
 			starRating: this.setRating(json['im:rating'].label),
-			version:    json['im:version'].label,
-			locale:     locale,
-			store:      country[locale],
+			version: json['im:version'].label,
+			locale: locale,
+			store: country[locale],
 		}
 	}
 
-	private decodeNextPage(json: any): number {
+	private static decodeNextPage(json: any): number {
 		for (const item of json) {
 			if (item.attributes.rel === 'next') {
 				return +('' + item.attributes.href.match(/page=\d+/)).replace(/\D/g, '') || null
@@ -99,7 +99,7 @@ export default class API {
 		return null
 	}
 
-	private generateUrl(locale: string, page: number): string {
+	private static generateUrl(locale: string, page: number): string {
 		const id: string = window.location.hash ? window.location.hash.substring(1) : this.defaultAppId
 		const pageString: string = page ? page.toString() : '1'
 
