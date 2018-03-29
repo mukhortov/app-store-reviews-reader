@@ -20,7 +20,7 @@ function fetchReviews(locale: string, page: number) {
 		if (nextPage && nextPage > page) {
 			fetchReviews(locale, nextPage)
 		}
-	})
+	}).catch()
 }
 
 for (const key in country) {
